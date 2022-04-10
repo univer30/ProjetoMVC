@@ -1,6 +1,7 @@
 package br.comJavaWeb.DAO;
 
 import java.lang.reflect.ParameterizedType;
+
 import java.util.ArrayList;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -21,11 +22,11 @@ public class GenericDAO<Entidade> {
 	   }
   
   public void salvar(Entidade entidade) {
-	  Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+	  Session sessao = HibernateUtil.getFabricaDeSessoes().getCurrentSession();
 	  Transaction transacao = null;
 	  try {
 		  transacao = sessao.beginTransaction();
-		  sessao.save(entidade);
+		  sessao.merge(entidade);
 		  transacao.commit();
 		
 	} catch (RuntimeException erro) {
@@ -108,6 +109,4 @@ public void editar( Entidade entidade) {
 
   }
  
- 
-  
 }

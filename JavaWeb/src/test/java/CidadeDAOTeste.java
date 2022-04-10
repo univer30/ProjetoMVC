@@ -39,12 +39,7 @@ public class CidadeDAOTeste {
 		Long codigo = 4L;
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		Cidade cidade = cidadeDAO.buscar(codigo);
-		cidadeDAO.excluir(cidade);
-		System.out.println("Codigo da cidade: " + cidade.getCondigo());
-		System.out.println("Nome da cidade: " + cidade.getNome());
-		System.out.println("Codigo da estado: " + cidade.getEstado().getCondigo());
-		System.out.println("Sigla da estado: " + cidade.getEstado().getSigla().getClass());
-		System.out.println("Nome da estado: " + cidade.getEstado().getNome());
+		cidadeDAO.excluir(cidade);	
 		
 	}
 	

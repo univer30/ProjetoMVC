@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Messages;
+
 import br.com.JavaWeb.domain.Estado;
 import br.comJavaWeb.DAO.EstadoDAO;
 
@@ -41,6 +43,7 @@ public class EstadoBean implements Serializable {
 		 estados = estadoDAO.listar();
 		
 	  } catch (RuntimeException ex) {
+		  Messages.addGlobalError("Erro ao listar!");
 	       ex.printStackTrace();
     }
  
@@ -56,7 +59,9 @@ public void excluir( ActionEvent evento) {
 		   EstadoDAO estadoDAO = new EstadoDAO();
 		   estadoDAO.excluir(estado);
 		   estados = estadoDAO.listar();
+		   Messages.addGlobalInfo("Excluido com sucesso!");
 	} catch (RuntimeException ex) {
+		Messages.addGlobalError("Erro em excluir!");
 		ex.printStackTrace();
 	}
   }
@@ -65,16 +70,20 @@ public void salvar() {
 	try {
 		   EstadoDAO estadoDAO = new EstadoDAO();
 		   estadoDAO.salvar(estado);
+		   Messages.addGlobalInfo("Salvo com sucesso!");
 		   estados = estadoDAO.listar();
 	} catch (RuntimeException ex) {
-		ex.printStackTrace();
+		Messages.addGlobalError("Erro em Salvar!");
+		  ex.printStackTrace();
 	}
 }
 
 public void editar(ActionEvent evento) {
 	try {
 		   estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
+		   Messages.addGlobalInfo("Editado com sucesso!");
 	} catch (RuntimeException ex) {
+		 Messages.addGlobalError("Erro ao editar!");
 		   ex.printStackTrace();
 	}	
   }
